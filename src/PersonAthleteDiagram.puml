@@ -1,0 +1,118 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+' Interface
+interface SportAction {
+    +doThis()
+}
+
+' Abstract Classes
+abstract class Person {
+    -firstName: String
+    -middleInitial: char
+    -lastName: String
+    -age: int
+    +Person(firstName: String, middleInitial: char, lastName: String, age: int)
+    +setFullName(firstName: String, middleInitial: char, lastName: String)
+    +getFullName(): String
+    +getFirstName(): String
+    +setFirstName(firstName: String)
+    +getMiddleInitial(): char
+    +setMiddleInitial(middleInitial: char)
+    +getLastName(): String
+    +setLastName(lastName: String)
+    +getAge(): int
+    +setAge(age: int)
+    #validateAndCapitalize(input: String, fieldName: String): String
+    +toString(): String
+    +equals(obj: Object): boolean
+}
+
+abstract class Athlete {
+    -team: String
+    -position: String
+    +Athlete(firstName: String, middleInitial: char, lastName: String, age: int, team: String, position: String)
+    +getTeam(): String
+    +setTeam(team: String)
+    +getPosition(): String
+    +setPosition(position: String)
+    +athleteDetails(): String
+    +doThis()
+    +equals(obj: Object): boolean
+}
+
+' Concrete Classes
+class Baseball {
+    -handedness: Handedness
+    -battingPosition: String
+    +Baseball(firstName: String, middleInitial: char, lastName: String, age: int, team: String, position: String, battingPosition: String, handedness: Handedness)
+    +getBattingPosition(): String
+    +setBattingPosition(battingPosition: String)
+    +describeHandedness(): String
+    +toString(): String
+    +doThis()
+    +equals(obj: Object): boolean
+}
+
+class Football {
+    -specialty: Specialty
+    +Football(firstName: String, middleInitial: char, lastName: String, age: int, team: String, position: String, specialty: Specialty)
+    +describeSpecialty(): String
+    +toString(): String
+    +doThis()
+    +equals(obj: Object): boolean
+}
+
+class Hockey {
+    -stickBrand: String
+    +Hockey(firstName: String, middleInitial: char, lastName: String, age: int, team: String, position: String, stickBrand: String)
+    +getStickBrand(): String
+    +setStickBrand(stickBrand: String)
+    +toString(): String
+    +doThis()
+    +equals(obj: Object): boolean
+}
+
+class Golf {
+    -mainSponsor: String
+    +Golf(firstName: String, middleInitial: char, lastName: String, age: int, team: String, mainSponsor: String)
+    +getMainSponsor(): String
+    +setMainSponsor(mainSponsor: String)
+    +toString(): String
+    +doThis()
+    +equals(obj: Object): boolean
+}
+
+' Enum Classes
+enum Handedness {
+    LEFTHANDED
+    RIGHTHANDED
+    BOTH
+    -description: String
+    +describe(): String
+}
+
+enum Specialty {
+    OFFENSE
+    DEFENSE
+    SPECIAL_TEAMS
+    -description: String
+    +describe(): String
+}
+
+' Relationships
+SportAction <|.. Athlete
+Person <|-- Athlete
+Athlete <|-- Baseball
+Athlete <|-- Football
+Athlete <|-- Hockey
+Athlete <|-- Golf
+Baseball o--> Handedness
+Football o--> Specialty
+
+' Main Class
+class PolymorphismTest {
+    +main(args: String[])
+    +printEqualsbySport(people: Person[], count: int)
+}
+@enduml
